@@ -21,7 +21,6 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->scalarNode('url')->defaultValue(self::API_URL)->end()
             ->scalarNode('key')->cannotBeEmpty()->end()
-            ->floatNode('connectionTimeout')->defaultValue(self::CONNECTION_TIMEOUT)->end()
             ->floatNode('requestTimeout')->defaultValue(self::REQUEST_TIMEOUT)->end()
             ->end();
 

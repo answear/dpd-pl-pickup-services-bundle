@@ -19,5 +19,17 @@ class AnswearDpdPlPickupServicesExtension extends Extension
             new FileLocator(__DIR__ . '/../Resources/config')
         );
         $loader->load('services.yaml');
+
+        $configuration = $this->getConfiguration($configs, $container);
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $definition = $container->getDefinition(ConfigProvider::class);
+        $definition->setArguments(
+            [
+                $config['url'],
+                $config['key'],
+                $config['requestTimeout'],
+            ]
+        );
     }
 }
