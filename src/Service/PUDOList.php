@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Answear\DpdPlPickupServicesBundle\Service;
 
+use Answear\DpdPlPickupServicesBundle\ValueObject\Coordinates;
 use Answear\DpdPlPickupServicesBundle\ValueObject\PUDO;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -58,7 +59,7 @@ class PUDOList
      *
      * @throws ServiceException
      */
-    public function byLatLng(float $latitude, float $longitude, float $distance): array
+    public function byLatLng(Coordinates $coordinates, float $distance): array
     {
         // @todo
     }
