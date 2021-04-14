@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RESPONSE>
+    <PUDO_ITEMS>
+        <PUDO_ITEM active="true" overloaded="false">
+            <PUDO_ID>PL15625</PUDO_ID>
+            <ORDER>1</ORDER>
+            <PUDO_TYPE>100</PUDO_TYPE>
+            <SERVICE_PUDO>100;200;201</SERVICE_PUDO>
+            <LANGUAGE>PL</LANGUAGE>
+            <ADDRESS1>Na Szaniec 21 box 4</ADDRESS1>
+            <ADDRESS2>ADDRESS2</ADDRESS2>
+            <ADDRESS3>ADDRESS3</ADDRESS3>
+            <LOCATION_HINT>Sklep Zoologiczny Akita : 885558055</LOCATION_HINT>
+            <ZIPCODE>31564</ZIPCODE>
+            <CITY>Kraków</CITY>
+            <COUNTRY>POL</COUNTRY>
+            <LONGITUDE>19.97894</LONGITUDE>
+            <LATITUDE>50.05874</LATITUDE>
+            <PARKING>true</PARKING>
+            <HANDICAPE>false</HANDICAPE>
+            <OPENING_HOURS_ITEMS>
+                <OPENING_HOURS_ITEM>
+                    <DAY_ID>1</DAY_ID>
+                    <START_TM>11:00</START_TM>
+                    <END_TM>17:00</END_TM>
+                </OPENING_HOURS_ITEM>
+                <OPENING_HOURS_ITEM>
+                    <DAY_ID>2</DAY_ID>
+                    <START_TM>11:00</START_TM>
+                    <END_TM>17:00</END_TM>
+                </OPENING_HOURS_ITEM>
+                <OPENING_HOURS_ITEM>
+                    <DAY_ID>3</DAY_ID>
+                    <START_TM>11:00</START_TM>
+                    <END_TM>17:00</END_TM>
+                </OPENING_HOURS_ITEM>
+                <OPENING_HOURS_ITEM>
+                    <DAY_ID>4</DAY_ID>
+                    <START_TM>11:00</START_TM>
+                    <END_TM>17:00</END_TM>
+                </OPENING_HOURS_ITEM>
+                <OPENING_HOURS_ITEM>
+                    <DAY_ID>5</DAY_ID>
+                    <START_TM>11:00</START_TM>
+                    <END_TM>17:00</END_TM>
+                </OPENING_HOURS_ITEM>
+                <OPENING_HOURS_ITEM>
+                    <DAY_ID>6</DAY_ID>
+                    <START_TM>10:00</START_TM>
+                    <END_TM>13:00</END_TM>
+                </OPENING_HOURS_ITEM>
+            </OPENING_HOURS_ITEMS>
+            <HOLIDAY_ITEMS>
+                <HOLIDAY_ITEM>
+                    <START_TM>06/04/2021</START_TM>
+                    <END_TM>18/04/2021</END_TM>
+                </HOLIDAY_ITEM>
+            </HOLIDAY_ITEMS>
+        </PUDO_ITEM>
+    </PUDO_ITEMS>
+</RESPONSE>

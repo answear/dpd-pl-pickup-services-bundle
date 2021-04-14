@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Answear\DpdPlPickupServicesBundle\ValueObject;
 
+use Webmozart\Assert\Assert;
+
 class Coordinates
 {
     public float $latitude;
@@ -11,7 +13,8 @@ class Coordinates
 
     public function __construct(float $latitude, float $longitude)
     {
-        // @todo validation
+        Assert::range($latitude, -90, 90);
+        Assert::range($longitude, -180, 180);
         $this->latitude = $latitude;
         $this->longitude = $longitude;
     }

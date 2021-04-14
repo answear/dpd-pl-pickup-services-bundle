@@ -15,10 +15,7 @@ class PUDO
     public Address $address;
     public Coordinates $coordinates;
     public AdditionalInfo $additionalInfo;
-    /**
-     * @var OpeningTime[]
-     */
-    public array $open = [];
+    public Week $opened;
     /**
      * @var HolidayDates[]
      */
