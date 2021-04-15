@@ -4,3 +4,5 @@ services:
         autoconfigure: true
         public: false
 
+    Answear\DpdPlPickupServicesBundle\:
+        resource: '../../{Service}'

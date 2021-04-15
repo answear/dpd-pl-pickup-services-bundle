@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RESPONSE>
+    <ERROR code="314">
+        <VALUE>Podana wartość key jest niepoprawna. Klucz nie istnieje lub jest nieaktywny.</VALUE>
+    </ERROR>
+</RESPONSE>

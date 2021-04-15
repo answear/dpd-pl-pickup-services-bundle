@@ -12,7 +12,7 @@ class ConfigProvider
 
     public function __construct(string $url, string $key, float $requestTimeout)
     {
-        $this->url = $url;
+        $this->url = rtrim($url, '/') . '/';
         $this->key = $key;
         $this->requestTimeout = $requestTimeout;
     }

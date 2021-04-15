@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Answear\DpdPlPickupServicesBundle\Service;
+namespace Answear\DpdPlPickupServicesBundle\Exception;
 
 class ServiceException extends \RuntimeException
 {
