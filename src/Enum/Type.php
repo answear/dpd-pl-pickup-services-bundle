@@ -9,21 +9,21 @@ use MabeEnum\Enum;
 class Type extends Enum
 {
     public const STANDARD = 100;
-    public const NETWORK = 200;
-    public const FULL_TIME = 300;
+    public const CHAIN = 200;
+    public const DPD = 300;
 
     public static function standard(): self
     {
         return self::get(self::STANDARD);
     }
 
-    public static function network(): self
+    public static function chain(): self
     {
-        return self::get(self::NETWORK);
+        return self::get(self::CHAIN);
     }
 
-    public static function fullTime(): self
+    public static function dpd(): self
     {
-        return self::get(self::FULL_TIME);
+        return self::get(self::DPD);
     }
 }

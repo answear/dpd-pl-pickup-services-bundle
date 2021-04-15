@@ -13,7 +13,7 @@ use Answear\DpdPlPickupServicesBundle\ValueObject\Coordinates;
 use Answear\DpdPlPickupServicesBundle\ValueObject\HolidayDates;
 use Answear\DpdPlPickupServicesBundle\ValueObject\OpeningTime;
 use Answear\DpdPlPickupServicesBundle\ValueObject\PUDO;
-use Answear\DpdPlPickupServicesBundle\ValueObject\Week;
+use Answear\DpdPlPickupServicesBundle\ValueObject\WeekStoreHours;
 
 class PUDOFactory
 {
@@ -59,7 +59,7 @@ class PUDOFactory
         return $info;
     }
 
-    private function createOpeningTimes(\SimpleXMLElement $xml): Week
+    private function createOpeningTimes(\SimpleXMLElement $xml): WeekStoreHours
     {
         $openings = [];
         foreach ($xml->OPENING_HOURS_ITEMS->OPENING_HOURS_ITEM as $opening) {
@@ -70,7 +70,7 @@ class PUDOFactory
             );
         }
 
-        return new Week(...$openings);
+        return new WeekStoreHours(...$openings);
     }
 
     /**

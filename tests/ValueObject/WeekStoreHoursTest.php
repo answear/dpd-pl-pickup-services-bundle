@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace ValueObject;
+namespace Answear\DpdPlPickupServicesBundle\Tests\ValueObject;
 
 use Answear\DpdPlPickupServicesBundle\Enum\Day;
 use Answear\DpdPlPickupServicesBundle\ValueObject\OpeningTime;
-use Answear\DpdPlPickupServicesBundle\ValueObject\Week;
+use Answear\DpdPlPickupServicesBundle\ValueObject\WeekStoreHours;
 use PHPUnit\Framework\TestCase;
 
-class WeekTest extends TestCase
+class WeekStoreHoursTest extends TestCase
 {
     /**
      * @test
@@ -25,7 +25,7 @@ class WeekTest extends TestCase
             Day::saturday(),
             Day::sunday(),
         ];
-        $week = new Week(
+        $week = new WeekStoreHours(
             new OpeningTime(Day::sunday(), '10:00', '11:00'),
             new OpeningTime(Day::wednesday(), '10:00', '11:00'),
         );
@@ -43,7 +43,7 @@ class WeekTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
 
-        new Week(
+        new WeekStoreHours(
             new OpeningTime(Day::monday(), '10:00', '11:00'),
             new OpeningTime(Day::monday(), '10:00', '11:00'),
         );
@@ -54,7 +54,7 @@ class WeekTest extends TestCase
      */
     public function isOpened(): void
     {
-        $week = new Week(new OpeningTime(Day::monday(), '10:00', '11:00'));
+        $week = new WeekStoreHours(new OpeningTime(Day::monday(), '10:00', '11:00'));
         self::assertTrue($week->isOpened(Day::monday()));
         self::assertFalse($week->isOpened(Day::tuesday()));
     }

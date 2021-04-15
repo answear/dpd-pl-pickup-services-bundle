@@ -7,15 +7,15 @@ namespace Answear\DpdPlPickupServicesBundle\ValueObject;
 use Answear\DpdPlPickupServicesBundle\Enum\Day;
 use Webmozart\Assert\Assert;
 
-class Week implements \IteratorAggregate
+class WeekStoreHours implements \IteratorAggregate
 {
-    private array $openingTimes = [];
+    private array $openingHours = [];
 
     public function __construct(OpeningTime ...$openingTimes)
     {
         foreach ($openingTimes as $opening) {
-            Assert::keyNotExists($this->openingTimes, $opening->day->getValue());
-            $this->openingTimes[$opening->day->getValue()] = $opening;
+            Assert::keyNotExists($this->openingHours, $opening->day->getValue());
+            $this->openingHours[$opening->day->getValue()] = $opening;
         }
     }
 
@@ -25,12 +25,12 @@ class Week implements \IteratorAggregate
     public function getIterator(): \Traversable
     {
         foreach (Day::getEnumerators() as $day) {
-            yield $day => $this->openingTimes[$day->getValue()] ?? null;
+            yield $day => $this->openingHours[$day->getValue()] ?? null;
         }
     }
 
     public function isOpened(Day $day): bool
     {
-        return isset($this->openingTimes[$day->getValue()]);
+        return isset($this->openingHours[$day->getValue()]);
     }
 }
