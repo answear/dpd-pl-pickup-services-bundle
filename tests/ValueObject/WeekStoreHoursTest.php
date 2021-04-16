@@ -27,6 +27,7 @@ class WeekStoreHoursTest extends TestCase
         ];
         $week = new WeekStoreHours(
             new OpeningTime(Day::sunday(), '10:00', '11:00'),
+            new OpeningTime(Day::sunday(), '12:00', '14:00'),
             new OpeningTime(Day::wednesday(), '10:00', '11:00'),
         );
 
@@ -34,19 +35,6 @@ class WeekStoreHoursTest extends TestCase
         foreach ($week as $day => $opening) {
             self::assertTrue($expected[$i++]->is($day));
         }
-    }
-
-    /**
-     * @test
-     */
-    public function duplicatedDayResultsInException(): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-
-        new WeekStoreHours(
-            new OpeningTime(Day::monday(), '10:00', '11:00'),
-            new OpeningTime(Day::monday(), '10:00', '11:00'),
-        );
     }
 
     /**

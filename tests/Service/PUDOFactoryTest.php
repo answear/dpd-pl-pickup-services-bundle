@@ -44,18 +44,22 @@ class PUDOFactoryTest extends TestCase
         self::assertCount(3, $pudo->additionalInfo->services);
         self::assertTrue($pudo->additionalInfo->parking);
         self::assertFalse($pudo->additionalInfo->wheelchairAccessible);
-        foreach ($pudo->opened as $day => $opening) {
+        foreach ($pudo->opened as $day => $openings) {
             switch (true) {
                 case Day::sunday()->is($day):
-                    self::assertNull($opening);
+                    self::assertCount(0, $openings);
                     break;
                 case Day::saturday()->is($day):
-                    self::assertSame('10:00', $opening->from);
-                    self::assertSame('13:00', $opening->to);
+                    self::assertCount(2, $openings);
+                    self::assertSame('10:00', $openings[0]->from);
+                    self::assertSame('13:00', $openings[0]->to);
+                    self::assertSame('18:00', $openings[1]->from);
+                    self::assertSame('20:00', $openings[1]->to);
                     break;
                 default:
-                    self::assertSame('11:00', $opening->from);
-                    self::assertSame('17:00', $opening->to);
+                    self::assertCount(1, $openings);
+                    self::assertSame('11:00', $openings[0]->from);
+                    self::assertSame('17:00', $openings[0]->to);
                     break;
             }
         }

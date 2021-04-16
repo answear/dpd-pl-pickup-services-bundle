@@ -49,6 +49,11 @@
                     <START_TM>10:00</START_TM>
                     <END_TM>13:00</END_TM>
                 </OPENING_HOURS_ITEM>
+                <OPENING_HOURS_ITEM>
+                    <DAY_ID>6</DAY_ID>
+                    <START_TM>18:00</START_TM>
+                    <END_TM>20:00</END_TM>
+                </OPENING_HOURS_ITEM>
             </OPENING_HOURS_ITEMS>
             <HOLIDAY_ITEMS>
                 <HOLIDAY_ITEM>
