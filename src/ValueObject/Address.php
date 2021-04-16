@@ -16,6 +16,6 @@ class Address
 
     public function getFullAddress(): string
     {
-        return trim(sprintf('%s %s %s', $this->address1, $this->address2, $this->address3));
+        return $this->address1 . $this->address2 . $this->address3;
     }
 }
