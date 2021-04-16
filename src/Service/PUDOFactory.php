@@ -22,7 +22,7 @@ class PUDOFactory
         $pudo = new PUDO();
         $pudo->active = 'true' === (string) $xml['active'];
         $pudo->id = (string) $xml->PUDO_ID;
-        $pudo->type = Type::byValue((int) $xml->PUDO_TYPE);
+        $pudo->type = Type::byValue((string) $xml->PUDO_TYPE);
         $pudo->language = (string) $xml->LANGUAGE;
         $pudo->address = $this->createAddress($xml);
         $pudo->coordinates = new Coordinates((float) $xml->LATITUDE, (float) $xml->LONGITUDE);
