@@ -9,8 +9,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    private const API_URL = 'https://mypudo.dpd.com.pl/api/';
-    private const CONNECTION_TIMEOUT = 10.0;
+    public const API_URL = 'https://mypudo.dpd.com.pl/api/pudo/';
     private const REQUEST_TIMEOUT = 10.0;
 
     public function getConfigTreeBuilder(): TreeBuilder
@@ -21,7 +20,6 @@ class Configuration implements ConfigurationInterface
             ->children()
             ->scalarNode('url')->defaultValue(self::API_URL)->end()
             ->scalarNode('key')->cannotBeEmpty()->end()
-            ->floatNode('connectionTimeout')->defaultValue(self::CONNECTION_TIMEOUT)->end()
             ->floatNode('requestTimeout')->defaultValue(self::REQUEST_TIMEOUT)->end()
             ->end();
 
