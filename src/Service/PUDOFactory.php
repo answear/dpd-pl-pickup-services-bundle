@@ -51,7 +51,11 @@ class PUDOFactory
     {
         $info = new AdditionalInfo();
         foreach (explode(';', (string) $xml->SERVICE_PUDO) as $service) {
-            $info->services[] = Service::byValue($service);
+            try {
+                $info->services[] = Service::byValue($service);
+            } catch (\InvalidArgumentException $e) {
+                // NOP, do not fail hard for new services
+            }
         }
         $info->wheelchairAccessible = 'true' === (string) $xml->HANDICAPE;
         $info->parking = 'true' === (string) $xml->PARKING;

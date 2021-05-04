@@ -5,7 +5,7 @@
             <PUDO_ID>PL15625</PUDO_ID>
             <ORDER>1</ORDER>
             <PUDO_TYPE>100</PUDO_TYPE>
-            <SERVICE_PUDO>100;200;201</SERVICE_PUDO>
+            <SERVICE_PUDO>100;200;201;THIS_DOES_NOT_EXIST</SERVICE_PUDO>
             <LANGUAGE>PL</LANGUAGE>
             <ADDRESS1>Na Szaniec 21 box 4</ADDRESS1>
             <ADDRESS2>ADDRESS2</ADDRESS2>
