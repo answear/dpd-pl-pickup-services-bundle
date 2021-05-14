@@ -17,6 +17,7 @@ class Service extends Enum
     public const ROD = 'P20';
     public const TYRES = 'P30';
     public const PALLET = 'P90';
+    public const DRESSING_ROOM = '10001';
 
     public static function delivery(): self
     {
@@ -61,5 +62,10 @@ class Service extends Enum
     public static function pallet(): self
     {
         return static::get(static::PALLET);
+    }
+
+    public static function dressingRoom(): self
+    {
+        return static::get(static::DRESSING_ROOM);
     }
 }

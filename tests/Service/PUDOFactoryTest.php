@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Answear\DpdPlPickupServicesBundle\Tests\Service;
 
 use Answear\DpdPlPickupServicesBundle\Enum\Day;
+use Answear\DpdPlPickupServicesBundle\Enum\Service;
 use Answear\DpdPlPickupServicesBundle\Enum\Type;
 use Answear\DpdPlPickupServicesBundle\Service\PUDOFactory;
 use Answear\DpdPlPickupServicesBundle\ValueObject\Coordinates;
@@ -42,6 +43,10 @@ class PUDOFactoryTest extends TestCase
         self::assertSame('POL', $pudo->address->country);
         self::assertEquals(new Coordinates(50.05874, 19.97894), $pudo->coordinates);
         self::assertCount(3, $pudo->additionalInfo->services);
+        self::assertTrue($pudo->additionalInfo->hasService(Service::delivery()));
+        self::assertTrue($pudo->additionalInfo->hasService(Service::dropoffOnline()));
+        self::assertTrue($pudo->additionalInfo->hasService(Service::dropoffOffline()));
+        self::assertFalse($pudo->additionalInfo->hasService(Service::swap()));
         self::assertTrue($pudo->additionalInfo->parking);
         self::assertFalse($pudo->additionalInfo->wheelchairAccessible);
         foreach ($pudo->opened as $day => $openings) {
