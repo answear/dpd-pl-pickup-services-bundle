@@ -14,4 +14,9 @@ class AdditionalInfo
     public array $services = [];
     public bool $wheelchairAccessible;
     public bool $parking;
+
+    public function hasService(Service $service): bool
+    {
+        return \in_array($service, $this->services, true);
+    }
 }
