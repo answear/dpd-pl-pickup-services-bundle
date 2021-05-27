@@ -13,7 +13,7 @@ class PUDO
     public Type $type;
     public string $language;
     public ?string $name;
-    public ?int $ditance;
+    public ?int $distance;
     public Address $address;
     public Coordinates $coordinates;
     public AdditionalInfo $additionalInfo;
