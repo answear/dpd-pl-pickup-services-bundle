@@ -15,6 +15,7 @@ class Type extends Enum
     public const SWIP_BOX_2 = '400402';
     public const POINT_PACK = '500501';
     public const FOREIGN_LOCKER = '400';
+    public const IF_EMPTY = self::STANDARD;
 
     public static function standard(): self
     {

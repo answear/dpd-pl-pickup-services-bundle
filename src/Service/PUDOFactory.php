@@ -22,10 +22,12 @@ class PUDOFactory
         $pudo = new PUDO();
         $pudo->active = 'true' === (string) $xml['active'];
         $pudo->id = (string) $xml->PUDO_ID;
-        $pudo->type = Type::byValue((string) $xml->PUDO_TYPE);
+        $pudo->name = (string) $xml->NAME;
+        $pudo->distance = (int)$xml->DISTANCE;
+        $pudo->type = $this->getType($xml->PUDO_TYPE);
         $pudo->language = (string) $xml->LANGUAGE;
         $pudo->address = $this->createAddress($xml);
-        $pudo->coordinates = new Coordinates((float) $xml->LATITUDE, (float) $xml->LONGITUDE);
+        $pudo->coordinates = new Coordinates($this->transformToFloat($xml->LATITUDE), $this->transformToFloat($xml->LONGITUDE));
         $pudo->additionalInfo = $this->createAdditionalInfo($xml);
         $pudo->opened = $this->createOpeningTimes($xml);
         $pudo->holidays = $this->createHolidays($xml);
@@ -84,12 +86,26 @@ class PUDOFactory
     {
         $dates = [];
         foreach ($xml->HOLIDAY_ITEMS->HOLIDAY_ITEM as $holiday) {
+            $start = $holiday->START_TM ?? $holiday->START_DTM ?? null;
+            $end = $holiday->END_TM ?? $holiday->END_DTM ?? null;
+
             $dates[] = new HolidayDates(
-                \DateTimeImmutable::createFromFormat('d/m/Y', (string) $holiday->START_TM)->setTime(0, 0, 0),
-                \DateTimeImmutable::createFromFormat('d/m/Y', (string) $holiday->END_TM)->setTime(23, 59, 59)
+                \DateTimeImmutable::createFromFormat('d/m/Y', (string) $start)->setTime(0, 0, 0),
+                \DateTimeImmutable::createFromFormat('d/m/Y', (string) $end)->setTime(23, 59, 59)
             );
         }
 
         return $dates;
+    }
+
+    private function getType(\SimpleXMLElement $xml_val): Type
+    {
+        $val = 0 !== $xml_val->count() ? $xml_val : Type::IF_EMPTY;
+        return Type::byValue((string) $val);
+    }
+
+    private function transformToFloat(\SimpleXMLElement $xml_val): float
+    {
+        return (float) str_replace(',', '.', $xml_val);
     }
 }

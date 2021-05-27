@@ -58,6 +58,31 @@ class PUDOList
      *
      * @throws ServiceException
      */
+    public function byAddressFr(string $zipCode, string $city, string $address): array
+    {
+        $params = [
+            'requestID' => \uniqid(),
+            'city' => $city,
+            'zipCode' => $zipCode,
+            'address' => $address,
+            'carrier' => 'EXA',
+            'countrycode' => 'FR',
+            'date_from' => '26/05/2021',
+            'max_pudo_number' => 15,  //not use but required (cf. doc)
+            'max_distance_search' => 25,  //not use but required (cf. doc)
+            'weight' => 10,  //not use but required (cf. doc)
+            'category' => 1, //not use but required (cf. doc)
+            'holiday_tolerant' => 'string', //not use but required (cf. doc)
+        ];
+
+        return $this->request('GetPudoList', $params);
+    }
+
+    /**
+     * @return PUDO[]
+     *
+     * @throws ServiceException
+     */
     public function byCountry(string $countryCode): array
     {
         return $this->request('list/bycountry', ['countryCode' => $countryCode]);
