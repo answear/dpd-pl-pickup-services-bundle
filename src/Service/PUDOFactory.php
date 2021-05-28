@@ -85,15 +85,18 @@ class PUDOFactory
     private function createHolidays(\SimpleXMLElement $xml): array
     {
         $dates = [];
-        foreach ($xml->HOLIDAY_ITEMS->HOLIDAY_ITEM as $holiday) {
-            $start = $holiday->START_TM ?? $holiday->START_DTM ?? null;
-            $end = $holiday->END_TM ?? $holiday->END_DTM ?? null;
+        if(null !== $xml->HOLIDAY_ITEMS && $xml->HOLIDAY_ITEMS->count() > 0){
+            foreach ($xml->HOLIDAY_ITEMS->HOLIDAY_ITEM as $holiday) {
+                $start = $holiday->START_TM ?? $holiday->START_DTM ?? null;
+                $end = $holiday->END_TM ?? $holiday->END_DTM ?? null;
 
-            $dates[] = new HolidayDates(
-                \DateTimeImmutable::createFromFormat('d/m/Y', (string) $start)->setTime(0, 0, 0),
-                \DateTimeImmutable::createFromFormat('d/m/Y', (string) $end)->setTime(23, 59, 59)
-            );
+                $dates[] = new HolidayDates(
+                    \DateTimeImmutable::createFromFormat('d/m/Y', (string) $start)->setTime(0, 0, 0),
+                    \DateTimeImmutable::createFromFormat('d/m/Y', (string) $end)->setTime(23, 59, 59)
+                );
+            }
         }
+
 
         return $dates;
     }

@@ -65,7 +65,6 @@ class PUDOList
             'city' => $city,
             'zipCode' => $zipCode,
             'address' => $address,
-            'carrier' => 'EXA',
             'countrycode' => 'FR',
             'date_from' => '26/05/2021',
             'max_pudo_number' => 15,  //not use but required (cf. doc)
@@ -75,7 +74,7 @@ class PUDOList
             'holiday_tolerant' => 'string', //not use but required (cf. doc)
         ];
 
-        return $this->request('GetPudoList', $params);
+        return $this->request('GetPudoList', $this->addParamDefaultFr($params));
     }
 
     /**
@@ -94,6 +93,16 @@ class PUDOList
     public function byId(string $id): ?PUDO
     {
         $result = $this->request('details', ['pudoId' => $id]);
+
+        return 1 === \count($result) ? \reset($result) : null;
+    }
+
+    /**
+     * @throws ServiceException
+     */
+    public function byIdFr(string $id): ?PUDO
+    {
+        $result = $this->request('GetPudoDetails', $this->addParamDefaultFr(['pudo_id' => $id]));
 
         return 1 === \count($result) ? \reset($result) : null;
     }
@@ -142,5 +151,14 @@ class PUDOList
         }
 
         return $items;
+    }
+
+    /**
+     * Add the defaults paramters for french query.
+     */
+    private function addParamDefaultFr(array $param): array
+    {
+        $param['carrier'] = 'EXA';
+        return $param;
     }
 }
