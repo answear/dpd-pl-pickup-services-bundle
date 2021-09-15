@@ -103,7 +103,7 @@ class PUDOFactory
 
     private function getType(\SimpleXMLElement $xml_val): Type
     {
-        $val = 0 !== $xml_val->count() ? $xml_val : Type::IF_EMPTY;
+        $val = 0 !== $xml_val->count() ? $xml_val : Type::ifEmpty();
         return Type::byValue((string) $val);
     }
 

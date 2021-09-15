@@ -66,7 +66,7 @@ class PUDOList
             'zipCode' => $zipCode,
             'address' => $address,
             'countrycode' => 'FR',
-            'date_from' => '26/05/2021',
+            'date_from' => (new \DateTime('now'))->modify('- 3 months')->format('d/m/Y'),
             'max_pudo_number' => 15,  //not use but required (cf. doc)
             'max_distance_search' => 25,  //not use but required (cf. doc)
             'weight' => 10,  //not use but required (cf. doc)
