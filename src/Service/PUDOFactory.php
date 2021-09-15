@@ -103,12 +103,11 @@ class PUDOFactory
 
     private function getType(\SimpleXMLElement $xml_val): Type
     {
-        $val = 0 !== $xml_val->count() ? $xml_val : Type::ifEmpty();
-        return Type::byValue((string) $val);
+        return 0 !== $xml_val->count() ? Type::byValue((string) $xml_val) : Type::ifEmpty();
     }
 
     private function transformToFloat(\SimpleXMLElement $xml_val): float
     {
-        return (float) str_replace(',', '.', $xml_val);
+        return (float) str_replace(',', '.', $xml_val->__toString());
     }
 }
