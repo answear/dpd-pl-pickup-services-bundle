@@ -25,12 +25,12 @@ class PUDOList
         $this->PUDOFactory = $PUDOFactory;
         $this->configProvider = $configProvider;
         $this->client = $client ?? new Client(
-                [
-                    'base_uri' => $configProvider->getUrl() . '/',
-                    'http_errors' => false,
-                    'timeout' => $configProvider->getRequestTimeout(),
-                ]
-            );
+            [
+                'base_uri' => $configProvider->getUrl(),
+                'http_errors' => false,
+                'timeout' => $configProvider->getRequestTimeout(),
+            ]
+        );
     }
 
     /**
