@@ -16,6 +16,11 @@ class Type extends Enum
     public const POINT_PACK = '500501';
     public const FOREIGN_LOCKER = '400';
 
+    public static function ifEmpty(): self
+    {
+        return self::standard();
+    }
+
     public static function standard(): self
     {
         return self::get(self::STANDARD);

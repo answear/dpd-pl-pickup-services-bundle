@@ -58,6 +58,30 @@ class PUDOList
      *
      * @throws ServiceException
      */
+    public function byAddressFr(string $zipCode, string $city, string $address): array
+    {
+        $params = [
+            'requestID' => \uniqid(),
+            'city' => $city,
+            'zipCode' => $zipCode,
+            'address' => $address,
+            'countrycode' => 'FR',
+            'date_from' => (new \DateTime('now'))->modify('- 3 months')->format('d/m/Y'),
+            'max_pudo_number' => 15,  //not use but required (cf. doc)
+            'max_distance_search' => 25,  //not use but required (cf. doc)
+            'weight' => 10,  //not use but required (cf. doc)
+            'category' => 1, //not use but required (cf. doc)
+            'holiday_tolerant' => 'string', //not use but required (cf. doc)
+        ];
+
+        return $this->request('GetPudoList', $this->addParamDefaultFr($params));
+    }
+
+    /**
+     * @return PUDO[]
+     *
+     * @throws ServiceException
+     */
     public function byCountry(string $countryCode): array
     {
         return $this->request('list/bycountry', ['countryCode' => $countryCode]);
@@ -69,6 +93,16 @@ class PUDOList
     public function byId(string $id): ?PUDO
     {
         $result = $this->request('details', ['pudoId' => $id]);
+
+        return 1 === \count($result) ? \reset($result) : null;
+    }
+
+    /**
+     * @throws ServiceException
+     */
+    public function byIdFr(string $id): ?PUDO
+    {
+        $result = $this->request('GetPudoDetails', $this->addParamDefaultFr(['pudo_id' => $id]));
 
         return 1 === \count($result) ? \reset($result) : null;
     }
@@ -117,5 +151,14 @@ class PUDOList
         }
 
         return $items;
+    }
+
+    /**
+     * Add the defaults paramters for french query.
+     */
+    private function addParamDefaultFr(array $param): array
+    {
+        $param['carrier'] = 'EXA';
+        return $param;
     }
 }
