@@ -15,6 +15,7 @@ class Type extends Enum
     public const SWIP_BOX_2 = '400402';
     public const POINT_PACK = '500501';
     public const FOREIGN_LOCKER = '400';
+    public const FOREIGN_EXTERNAL_LOCKER = '501';
 
     public static function standard(): self
     {
@@ -49,5 +50,10 @@ class Type extends Enum
     public static function foreignLocker(): self
     {
         return self::get(self::FOREIGN_LOCKER);
+    }
+
+    public static function foreignExternalLocker(): self
+    {
+        return self::get(self::FOREIGN_EXTERNAL_LOCKER);
     }
 }
