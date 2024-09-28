@@ -6,29 +6,13 @@ namespace Answear\DpdPlPickupServicesBundle\Service;
 
 class ConfigProvider
 {
-    private string $url;
-    private string $key;
-    private float $requestTimeout;
+    public string $url;
 
-    public function __construct(string $url, string $key, float $requestTimeout)
-    {
+    public function __construct(
+        string $url,
+        public string $key,
+        public float $requestTimeout,
+    ) {
         $this->url = rtrim($url, '/') . '/';
-        $this->key = $key;
-        $this->requestTimeout = $requestTimeout;
-    }
-
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    public function getKey(): string
-    {
-        return $this->key;
-    }
-
-    public function getRequestTimeout(): float
-    {
-        return $this->requestTimeout;
     }
 }

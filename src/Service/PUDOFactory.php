@@ -22,7 +22,7 @@ class PUDOFactory
         $pudo = new PUDO();
         $pudo->active = 'true' === (string) $xml['active'];
         $pudo->id = (string) $xml->PUDO_ID;
-        $pudo->type = Type::byValue((string) $xml->PUDO_TYPE);
+        $pudo->type = Type::from((string) $xml->PUDO_TYPE);
         $pudo->language = (string) $xml->LANGUAGE;
         $pudo->address = $this->createAddress($xml);
         $pudo->coordinates = new Coordinates((float) $xml->LATITUDE, (float) $xml->LONGITUDE);
@@ -52,8 +52,8 @@ class PUDOFactory
         $info = new AdditionalInfo();
         foreach (explode(';', (string) $xml->SERVICE_PUDO) as $service) {
             try {
-                $info->services[] = Service::byValue($service);
-            } catch (\InvalidArgumentException $e) {
+                $info->services[] = Service::from($service);
+            } catch (\ValueError) {
                 // NOP, do not fail hard for new services
             }
         }
@@ -68,7 +68,7 @@ class PUDOFactory
         $openings = [];
         foreach ($xml->OPENING_HOURS_ITEMS->OPENING_HOURS_ITEM as $opening) {
             $openings[] = new OpeningTime(
-                Day::byValue((string) $opening->DAY_ID),
+                Day::from((string) $opening->DAY_ID),
                 (string) $opening->START_TM,
                 (string) $opening->END_TM
             );

@@ -6,12 +6,9 @@ namespace Answear\DpdPlPickupServicesBundle\ValueObject;
 
 class HolidayDates
 {
-    public \DateTimeImmutable $from;
-    public \DateTimeImmutable $to;
-
-    public function __construct(\DateTimeImmutable $from, \DateTimeImmutable $to)
-    {
-        $this->from = $from;
-        $this->to = $to;
+    public function __construct(
+        public \DateTimeImmutable $from,
+        public \DateTimeImmutable $to,
+    ) {
     }
 }

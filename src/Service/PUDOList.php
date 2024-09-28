@@ -13,22 +13,18 @@ use GuzzleHttp\ClientInterface;
 
 class PUDOList
 {
-    private PUDOFactory $PUDOFactory;
-    private ConfigProvider $configProvider;
     private ClientInterface $client;
 
     public function __construct(
-        PUDOFactory $PUDOFactory,
-        ConfigProvider $configProvider,
-        ?ClientInterface $client = null
+        private PUDOFactory $PUDOFactory,
+        private ConfigProvider $configProvider,
+        ?ClientInterface $client = null,
     ) {
-        $this->PUDOFactory = $PUDOFactory;
-        $this->configProvider = $configProvider;
         $this->client = $client ?? new Client(
             [
-                'base_uri' => $configProvider->getUrl(),
+                'base_uri' => $configProvider->url,
                 'http_errors' => false,
-                'timeout' => $configProvider->getRequestTimeout(),
+                'timeout' => $configProvider->requestTimeout,
             ]
         );
     }
@@ -41,7 +37,7 @@ class PUDOList
     public function byAddress(string $zipCode, string $city, ?string $address = null): array
     {
         $params = [
-            'requestID' => \uniqid(),
+            'requestID' => \uniqid('', true),
             'city' => $city,
             'zipCode' => $zipCode,
             'servicePudo_display' => 1,
@@ -83,7 +79,7 @@ class PUDOList
         return $this->request(
             'list/bylonglat',
             [
-                'requestID' => \uniqid(),
+                'requestID' => \uniqid('', true),
                 'latitude' => $coordinates->latitude,
                 'longitude' => $coordinates->longitude,
                 'max_distance_search' => $distance,
@@ -96,7 +92,7 @@ class PUDOList
      */
     private function request(string $endpoint, array $params): array
     {
-        $params['key'] = $this->configProvider->getKey();
+        $params['key'] = $this->configProvider->key;
 
         $response = $this->client->request('GET', $endpoint, ['query' => $params]);
         if ($response->getBody()->isSeekable()) {

@@ -16,10 +16,10 @@ class WeekStoreHours implements \IteratorAggregate
     public function __construct(OpeningTime ...$openingTimes)
     {
         foreach ($openingTimes as $opening) {
-            if (!isset($this->openingHours[$opening->day->getValue()])) {
-                $this->openingHours[$opening->day->getValue()] = [];
+            if (!isset($this->openingHours[$opening->day->value])) {
+                $this->openingHours[$opening->day->value] = [];
             }
-            $this->openingHours[$opening->day->getValue()][] = $opening;
+            $this->openingHours[$opening->day->value][] = $opening;
         }
     }
 
@@ -28,13 +28,13 @@ class WeekStoreHours implements \IteratorAggregate
      */
     public function getIterator(): \Traversable
     {
-        foreach (Day::getEnumerators() as $day) {
-            yield $day => $this->openingHours[$day->getValue()] ?? [];
+        foreach (Day::cases() as $day) {
+            yield $day => $this->openingHours[$day->value] ?? [];
         }
     }
 
     public function isOpened(Day $day): bool
     {
-        return isset($this->openingHours[$day->getValue()]);
+        return isset($this->openingHours[$day->value]);
     }
 }
