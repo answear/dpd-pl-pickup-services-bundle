@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Service;
+namespace Answear\DpdPlPickupServicesBundle\Tests\Service;
 
 use Answear\DpdPlPickupServicesBundle\DependencyInjection\Configuration;
 use Answear\DpdPlPickupServicesBundle\Exception\MalformedResponseException;
@@ -18,6 +18,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 
 class PUDOListTest extends TestCase
@@ -40,7 +41,7 @@ class PUDOListTest extends TestCase
 
         $this->PUDOList = new PUDOList(
             new PUDOFactory(),
-            $this->createMock(ConfigProvider::class),
+            new ConfigProvider('key', 'url', 10),
             new Client(
                 [
                     'base_uri' => Configuration::API_URL,
@@ -51,9 +52,7 @@ class PUDOListTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function byAddress(): void
     {
         $this->guzzleHandler->append(
@@ -78,9 +77,7 @@ class PUDOListTest extends TestCase
         self::assertSame('1', $query['servicePudo_display']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function byCountry(): void
     {
         $this->guzzleHandler->append(
@@ -101,9 +98,7 @@ class PUDOListTest extends TestCase
         self::assertSame('POL', $query['countryCode']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function byCountryNoResults(): void
     {
         $this->guzzleHandler->append(
@@ -117,9 +112,7 @@ class PUDOListTest extends TestCase
         self::assertCount(0, $this->PUDOList->byCountry('POL'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function byId(): void
     {
         $this->guzzleHandler->append(
@@ -142,9 +135,7 @@ class PUDOListTest extends TestCase
         self::assertSame('PL15625', $query['pudoId']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function byIdNoResult(): void
     {
         $this->guzzleHandler->append(
@@ -158,9 +149,7 @@ class PUDOListTest extends TestCase
         self::assertNull($this->PUDOList->byId('PL15625'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function byLatLng(): void
     {
         $this->guzzleHandler->append(
@@ -184,9 +173,7 @@ class PUDOListTest extends TestCase
         self::assertSame('100', $query['max_distance_search']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function apiError(): void
     {
         $this->guzzleHandler->append(
@@ -204,19 +191,13 @@ class PUDOListTest extends TestCase
         $this->PUDOList->byId('PL15625');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function noXmlInResponse(): void
     {
         $this->guzzleHandler->append(new Response(500, [], 'Internal Server Error'));
 
-        try {
-            $this->PUDOList->byId('PL15625');
-            self::fail('An exception should have been thrown');
-        } catch (MalformedResponseException $e) {
-            self::assertSame('Internal Server Error', $e->getResponse());
-        }
+        $this->expectExceptionObject(new MalformedResponseException('Internal Server Error'));
+        $this->PUDOList->byId('PL15625');
     }
 
     private function assertThreeResults(array $results): void
