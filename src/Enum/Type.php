@@ -14,4 +14,5 @@ enum Type: string
     case PointPack = '500501';
     case ForeignLocker = '400';
     case ForeignExternalLocker = '501';
+    case ZabkaPickup = '500502';
 }
