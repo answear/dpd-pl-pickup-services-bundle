@@ -11,7 +11,7 @@ use Answear\DpdPlPickupServicesBundle\ValueObject\PUDO;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 
-class PUDOList
+class PUDOList extends AbstractPUDOList
 {
     private ClientInterface $client;
 
@@ -31,66 +31,8 @@ class PUDOList
 
     /**
      * @return PUDO[]
-     *
-     * @throws ServiceException
      */
-    public function byAddress(string $zipCode, string $city, ?string $address = null): array
-    {
-        $params = [
-            'requestID' => \uniqid('', true),
-            'city' => $city,
-            'zipCode' => $zipCode,
-            'servicePudo_display' => 1,
-        ];
-        if (null !== $address) {
-            $params['address'] = $address;
-        }
-
-        return $this->request('list/byaddress', $params);
-    }
-
-    /**
-     * @return PUDO[]
-     *
-     * @throws ServiceException
-     */
-    public function byCountry(string $countryCode): array
-    {
-        return $this->request('list/bycountry', ['countryCode' => $countryCode]);
-    }
-
-    /**
-     * @throws ServiceException
-     */
-    public function byId(string $id): ?PUDO
-    {
-        $result = $this->request('details', ['pudoId' => $id]);
-
-        return 1 === \count($result) ? \reset($result) : null;
-    }
-
-    /**
-     * @return PUDO[]
-     *
-     * @throws ServiceException
-     */
-    public function byLatLng(Coordinates $coordinates, int $distance): array
-    {
-        return $this->request(
-            'list/bylonglat',
-            [
-                'requestID' => \uniqid('', true),
-                'latitude' => $coordinates->latitude,
-                'longitude' => $coordinates->longitude,
-                'max_distance_search' => $distance,
-            ]
-        );
-    }
-
-    /**
-     * @return PUDO[]
-     */
-    private function request(string $endpoint, array $params): array
+    protected function request(string $endpoint, array $params): iterable
     {
         $params['key'] = $this->configProvider->key;
 
