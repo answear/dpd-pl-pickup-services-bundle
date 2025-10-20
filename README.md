@@ -31,8 +31,12 @@ instance of `\Answear\DpdPlPickupServicesBundle\Service\ConfigProvider` object.
 Usage
 -----
 
-DPD's API is available through the `Answear\DpdPlPickupServicesBundle\Service\PUDOList`
-that is automatically registered in your Symfony application's DI container. PUDO items
+DPD's API is available through two main services:
+
+1. `Answear\DpdPlPickupServicesBundle\Service\PUDOList` - returns all PUDO items at once
+2. `Answear\DpdPlPickupServicesBundle\Service\PUDOListStreaming` - streams PUDO items one by one
+
+Both services are automatically registered in your Symfony application's DI container. PUDO items
 are returned to you as `Answear\DpdPlPickupServicesBundle\ValueObject\PUDO` objects.
 
 Final notes
