@@ -6,6 +6,7 @@
     "require": {
         "php": "^8.4",
         "ext-simplexml": "*",
+        "ext-xmlreader": "*",
         "guzzlehttp/guzzle": "^7.8.2",
         "guzzlehttp/psr7": "^2.6",
         "symfony/http-kernel": "^7.0.3",
