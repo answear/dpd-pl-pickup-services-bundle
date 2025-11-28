@@ -9,8 +9,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
-    public const API_URL = 'https://mypudo.dpd.com.pl/api/pudo/';
-    private const REQUEST_TIMEOUT = 10.0;
+    public const string API_URL = 'https://mypudo.dpd.com.pl/api/pudo/';
+
+    private const float REQUEST_TIMEOUT = 30.0;
 
     public function getConfigTreeBuilder(): TreeBuilder
     {

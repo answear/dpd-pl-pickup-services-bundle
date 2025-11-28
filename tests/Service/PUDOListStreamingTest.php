@@ -43,7 +43,6 @@ class PUDOListStreamingTest extends TestCase
                 [
                     'base_uri' => Configuration::API_URL,
                     'handler' => $handlerStack,
-                    'http_errors' => false,
                     'stream' => true,
                 ]
             )
@@ -196,9 +195,10 @@ class PUDOListStreamingTest extends TestCase
     #[Test]
     public function noXmlInResponse(): void
     {
-        $this->guzzleHandler->append(new Response(500, [], 'Internal Server Error'));
+        $exception = new \Exception('Internal Server Error', 500);
+        $this->guzzleHandler->append(new Response($exception->getCode(), [], $exception->getMessage()));
 
-        $this->expectExceptionObject(new MalformedResponseException('Internal Server Error'));
+        $this->expectExceptionObject(new MalformedResponseException($exception->getMessage(), $exception));
         $this->PUDOListStreaming->byId('PL15625');
     }
 

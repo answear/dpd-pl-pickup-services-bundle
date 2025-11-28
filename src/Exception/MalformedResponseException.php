@@ -6,8 +6,8 @@ namespace Answear\DpdPlPickupServicesBundle\Exception;
 
 class MalformedResponseException extends \RuntimeException
 {
-    public function __construct(public string $response)
+    public function __construct(public string $response, ?\Throwable $previous = null)
     {
-        parent::__construct('Response is not a valid XML');
+        parent::__construct('Response is not a valid XML', $previous?->getCode() ?? 0, $previous);
     }
 }
