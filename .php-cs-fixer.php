@@ -1,16 +1,18 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
+declare(strict_types=1);
+
+$finder = (new PhpCsFixer\Finder())
+    ->in(__DIR__)
     ->exclude(
         [
             'vendor',
         ]
-    )
-    ->in(__DIR__);
+    );
 
-$config = new PhpCsFixer\Config();
-
-return $config
+return (new PhpCsFixer\Config())
+    ->setFinder($finder)
+    ->registerCustomFixers([])
     ->setRules(
         [
             '@Symfony' => true,
@@ -23,6 +25,16 @@ return $config
             'phpdoc_var_without_name' => false,
             'phpdoc_to_comment' => false,
             'single_line_throw' => false,
+            'modernize_types_casting' => true,
+            'function_declaration' => false,
+            'ordered_imports' => [
+                'imports_order' => [
+                    'class',
+                    'function',
+                    'const',
+                ],
+                'sort_algorithm' => 'alpha',
+            ],
         ]
     )
-    ->setFinder($finder);
+    ->setRiskyAllowed(true);

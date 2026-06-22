@@ -72,6 +72,5 @@ abstract class AbstractPUDOList
         );
     }
 
-    
     abstract protected function request(string $endpoint, array $params): iterable;
 }
