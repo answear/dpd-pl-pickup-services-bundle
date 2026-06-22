@@ -6,7 +6,6 @@ namespace Answear\DpdPlPickupServicesBundle\Service;
 
 use Answear\DpdPlPickupServicesBundle\Exception\MalformedResponseException;
 use Answear\DpdPlPickupServicesBundle\Exception\ServiceException;
-use Answear\DpdPlPickupServicesBundle\ValueObject\Coordinates;
 use Answear\DpdPlPickupServicesBundle\ValueObject\PUDO;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
