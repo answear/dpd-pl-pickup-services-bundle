@@ -9,6 +9,7 @@
         "ext-xmlreader": "*",
         "guzzlehttp/guzzle": "^7.8.2",
         "guzzlehttp/psr7": "^2.6",
+        "symfony/dependency-injection": "^7.0.3|^8.0",
         "symfony/http-kernel": "^7.0.3|^8.0",
         "webmozart/assert": "^1.11|^2.0"
     },
